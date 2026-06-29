@@ -30,6 +30,23 @@ Tests whether S&P 500 daily log returns follow a normal distribution — a core 
 
 **Conclusion:** S&P 500 returns exhibit significant excess kurtosis inconsistent with the random walk hypothesis, providing early evidence against weak-form EMH.
 
+### 2. ARIMA Return Prediction (`arima-analysis/`)
+**Status:** Complete
+
+Tests whether an ARIMA time-series model can predict future S&P 500 returns from past returns — a direct test of weak-form market efficiency.
+
+**Methodology:**
+- S&P 500 log returns, 2015–2024 via yfinance
+- Augmented Dickey-Fuller test to confirm stationarity
+- ARIMA(1,0,1) fit on 80% train / 20% test split
+- Compared forecast RMSE against a naive zero-forecast baseline
+
+**Key Findings:**
+- ARIMA RMSE: 0.012108 vs naive baseline 0.012107
+- Improvement over naive forecast: -0.01% (effectively zero)
+- The model captures no meaningful predictive signal from past returns
+
+**Conclusion:** A standard time-series model cannot predict future returns from historical returns, providing direct empirical support for weak-form EMH — past prices do not inform future ones.
 ---
 
 *More analyses added regularly. Each project builds toward a comprehensive test of market efficiency.*
@@ -39,7 +56,7 @@ Python 3 · pandas · numpy · scipy · matplotlib · plotly · statsmodels · a
 
 ## Roadmap
 - [x] EMH statistical analysis + fat tails
-- [ ] ARIMA return prediction model
+- [x] ARIMA return prediction model
 - [ ] GARCH volatility modelling
 - [ ] Rolling window EMH testing
 - [ ] Monte Carlo price simulations
