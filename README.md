@@ -66,6 +66,25 @@ Models the volatility of S&P 500 returns using a GARCH(1,1) model — testing wh
 - Estimated volatility spikes sharply during market stress (e.g. early 2020) and stays elevated, confirming volatility clustering
 
 **Conclusion:** While returns themselves are unpredictable (see ARIMA analysis), their volatility is highly persistent and forecastable. Market efficiency applies to return *direction*, not return *magnitude* — a more nuanced picture than pure randomness.
+
+### 4. Monte Carlo Price Simulation (`monte-carlo/`)
+**Status:** Complete
+
+Simulates 10,000 possible one-year price paths for the S&P 500 using Geometric Brownian Motion, estimating the distribution of future outcomes and quantifying risk.
+
+**Methodology:**
+- Estimated drift and volatility from 2015–2024 S&P 500 log returns
+- Simulated 10,000 independent price paths over a 252-day horizon
+- Each daily step drawn from a normal distribution around the historical drift
+- Analyzed the distribution of ending prices
+
+**Key Findings (from a starting price of ~4,770):**
+- Median 1-year outcome: ~5,233 (+10%)
+- 5th percentile (bad case): ~3,868 (−19%)
+- 95th percentile (good case): ~7,064 (+48%)
+- Probability of ending the year at a loss: 30.5%
+
+**Key Insight:** Even with positive expected returns, ~30% of simulated paths end in a loss — illustrating that positive drift does not imply low risk. Notably, this model assumes normally-distributed returns and constant volatility; given the fat tails (see EMH analysis) and volatility clustering (see GARCH analysis) found elsewhere in this repo, this simulation likely *understates* true tail risk.
 ---
 
 *More analyses added regularly. Each project builds toward a comprehensive test of market efficiency.*
@@ -78,7 +97,7 @@ Python 3 · pandas · numpy · scipy · matplotlib · plotly · statsmodels · a
 - [x] ARIMA return prediction model
 - [x] GARCH volatility modelling
 - [ ] Rolling window EMH testing
-- [ ] Monte Carlo price simulations
+- [x] Monte Carlo price simulations
 - [ ] Black-Scholes options pricing
 - [ ] Backtesting engine
 
