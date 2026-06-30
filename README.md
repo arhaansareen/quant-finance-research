@@ -86,6 +86,7 @@ Simulates 10,000 possible one-year price paths for the S&P 500 using Geometric B
 
 **Key Insight:** 
 Even with positive expected returns, ~30% of simulated paths end in a loss — illustrating that positive drift does not imply low risk. Notably, this model assumes normally-distributed returns and constant volatility; given the fat tails (see EMH analysis) and volatility clustering (see GARCH analysis) found elsewhere in this repo, this simulation likely *understates* true tail risk.
+
 ---
 
 *More analyses added regularly. Each project builds toward a comprehensive test of market efficiency.*
