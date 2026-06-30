@@ -47,6 +47,25 @@ Tests whether an ARIMA time-series model can predict future S&P 500 returns from
 - The model captures no meaningful predictive signal from past returns
 
 **Conclusion:** A standard time-series model cannot predict future returns from historical returns, providing direct empirical support for weak-form EMH — past prices do not inform future ones.
+
+### 3. GARCH Volatility Modelling (`garch-analysis/`)
+**Status:** Complete
+
+Models the volatility of S&P 500 returns using a GARCH(1,1) model — testing whether, even though returns are unpredictable, their *volatility* is.
+
+**Methodology:**
+- S&P 500 log returns, 2015–2024 via yfinance
+- Fit a GARCH(1,1) model via maximum likelihood (arch library)
+- Extracted volatility persistence parameters and estimated conditional volatility over time
+
+**Key Findings:**
+- alpha (shock reaction): 0.197
+- beta (volatility persistence): 0.778
+- Total persistence (alpha + beta): 0.974 — extremely high
+- All parameters highly statistically significant (beta t-stat ≈ 25)
+- Estimated volatility spikes sharply during market stress (e.g. early 2020) and stays elevated, confirming volatility clustering
+
+**Conclusion:** While returns themselves are unpredictable (see ARIMA analysis), their volatility is highly persistent and forecastable. Market efficiency applies to return *direction*, not return *magnitude* — a more nuanced picture than pure randomness.
 ---
 
 *More analyses added regularly. Each project builds toward a comprehensive test of market efficiency.*
@@ -57,7 +76,7 @@ Python 3 · pandas · numpy · scipy · matplotlib · plotly · statsmodels · a
 ## Roadmap
 - [x] EMH statistical analysis + fat tails
 - [x] ARIMA return prediction model
-- [ ] GARCH volatility modelling
+- [x] GARCH volatility modelling
 - [ ] Rolling window EMH testing
 - [ ] Monte Carlo price simulations
 - [ ] Black-Scholes options pricing
